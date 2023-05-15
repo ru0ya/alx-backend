@@ -61,7 +61,7 @@ class Server:
             raise AssertionError
         try:
             start_index, end_index = index_range(page, page_size)
-            paginated_data = data[start_index:end_index]
+            paginated_data = data.iloc[start_index:end_index].values.tolist()
             return paginated_data
         except IndexError:
             return []
