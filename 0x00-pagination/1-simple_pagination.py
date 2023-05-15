@@ -57,5 +57,12 @@ class Server:
         data = pd.read_csv("Popular_Baby_Names.csv")
         assert page > 0
         assert page_size > 0
+        try:
+            paginated_data = data.index_range()
+            return paginated_data
+        except IndexError:
+            return []
+
+
 
             
