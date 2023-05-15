@@ -55,14 +55,14 @@ class Server:
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         data = pd.read_csv("Popular_Baby_Names.csv")
-        assert page > 0
-        assert page_size > 0
+        if not (isinstance(page, int) and page > 0):
+            raise AssertionError
+        if not (isinstance(page_size, int) and page > 0):
+            raise AssertionError
         try:
-            paginated_data = data.index_range()
+            start_index, end_index = index_range(page, page_size)
+            paginated_data = data[start_index:end_index]
             return paginated_data
         except IndexError:
             return []
-
-
-
             
