@@ -56,4 +56,3 @@ class Server:
                 'data': data
                 }
         return hyper_index
-
