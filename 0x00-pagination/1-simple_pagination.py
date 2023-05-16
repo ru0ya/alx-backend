@@ -56,17 +56,14 @@ class Server:
         """
         Returns correct list of rows
         """
-        with open('Popular_Baby_Names.csv', 'r') as file:
-            data = csv.reader(file)
-            if not (isinstance(page, int) and page > 0):
-                raise AssertionError
-            if not (isinstance(page_size, int) and page > 0):
-                raise AssertionError
-            try:
-                start_index, end_index = index_range(page, page_size)
-                paginated_data = [row for i, row in enumerate(data)
-                                  if start_index <= i < end_index]
+        assert isinstance(page, int) and page > 0
+        assert isinstance(page_size, int) and page > 0
 
-                return paginated_data
-            except IndexError:
-                return []
+        try:
+            start_index = (page - 1) * page_size
+            end_index = start_index + page_size
+            dataset = self.dataset()
+
+            return dataset[start_index:end_index]
+        except IndexError:
+            return []
