@@ -15,7 +15,7 @@ Page numbers are 1-indexed, i.e. the first page is page 1.
 
 import csv
 import math
-from typing import List, Tuple
+from typing import List, Tuple, Dict
 
 
 def index_range(page: int, page_size: int) -> Tuple[int]:
@@ -70,3 +70,13 @@ class Server:
                 return paginated_data
             except IndexError:
                 return []
+
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict[str, List]:
+        """
+        function that takes page and page_size as arguments
+
+        Returns: Dictionary containing key-value pairs
+        """
+
+
+
