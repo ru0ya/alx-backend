@@ -71,12 +71,29 @@ class Server:
             except IndexError:
                 return []
 
-    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict[str, List]:
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict[int, List]:
         """
         function that takes page and page_size as arguments
 
         Returns: Dictionary containing key-value pairs
         """
+        try:
+            data = self.get_page(page, page_size)
+        except AssertionError:
+            return {}
+
+
+        total_pages = (len(data) + page_size - 1) // page_size
+        paginate_data = {
+                'page_size': page_size,
+                'page': page,
+                'data': data,
+                'next_page': page + 1 if page > 1 else None,
+                'prev_page': page - 1 if page < total_pages else None,
+                'total_pages': total_pages
+                }
+        return paginate_data
+
 
 
 
