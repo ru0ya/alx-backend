@@ -82,7 +82,6 @@ class Server:
         except AssertionError:
             return {}
 
-
         total_pages = (len(data) + page_size - 1) // page_size
         paginate_data = {
                 'page_size': page_size,
@@ -93,7 +92,3 @@ class Server:
                 'total_pages': total_pages
                 }
         return paginate_data
-
-
-
-
