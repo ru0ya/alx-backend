@@ -51,7 +51,7 @@ class Server:
             next_index: the next index to query with
             page_size: the current page size
             data: the actual page of the dataset
-            """
+        """
         dataset = self.__dataset
         assert index is not None and index >= 0 and index < len(dataset)
 
