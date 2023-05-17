@@ -16,6 +16,7 @@ class LRUCache(BaseCaching):
         child constructor
         """
         super().__init__()
+        self.usage_history = []
 
     def put(self, key, item):
         """
@@ -28,9 +29,13 @@ class LRUCache(BaseCaching):
         in self.cache_data is higher than BaseCaching.MAX_ITEMS
         """
         if key is None or item is None:
-            pass
+            return
 
         self.cache_data[key] = item
+
+        if key not in self.usage_history:
+            self.usage_history.append(key)
+
         last_item = list(self.cache_data)[-1]
 
         if len(self.cache_data) > BaseCaching.MAX_ITEMS:
