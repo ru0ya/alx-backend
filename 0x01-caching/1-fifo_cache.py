@@ -22,7 +22,7 @@ class FIFOCache(BaseCaching):
         if key or item is none returns nothing
         """
         if item is None or key is None:
-            pass
+            return
         self.cache_data[key] = item
 
         last_key = list(self.cache_data)[0]
