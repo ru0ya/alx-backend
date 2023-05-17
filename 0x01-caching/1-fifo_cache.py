@@ -14,6 +14,7 @@ class FIFOCache(BaseCaching):
     """
     def __init__(self):
         super().__init__()
+        self.keys = []
 
     def put(self, key, item):
         """
@@ -24,6 +25,9 @@ class FIFOCache(BaseCaching):
         if item is None or key is None:
             return
         self.cache_data[key] = item
+
+        if key not in self.keys:
+            self.keys.append(key)
 
         last_key = list(self.cache_data)[0]
 
@@ -41,6 +45,3 @@ class FIFOCache(BaseCaching):
             return None
 
         return self.cache_data.get(key)
-
-
-

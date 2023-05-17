@@ -9,6 +9,11 @@ BaseCaching = __import__('base_caching').BaseCaching
 
 
 class BasicCache(BaseCaching):
+    """
+    Basic cache
+    Inherits from classBaseCaching
+    Attributes: put, get
+    """
     def put(self, key, item):
         """
         Assigns the dictionary self.cache_data the item
@@ -17,8 +22,6 @@ class BasicCache(BaseCaching):
         """
         if item is not None or key is not None:
             self.cache_data[key] = item
-        else:
-            return
 
     def get(self, key):
         """
