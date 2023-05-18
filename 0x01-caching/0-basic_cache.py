@@ -22,6 +22,8 @@ class BasicCache(BaseCaching):
         """
         if item is not None or key is not None:
             self.cache_data[key] = item
+        else:
+            return
 
     def get(self, key):
         """

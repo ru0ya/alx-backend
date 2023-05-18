@@ -24,6 +24,7 @@ class FIFOCache(BaseCaching):
         """
         if item is None or key is None:
             return
+
         self.cache_data[key] = item
 
         if key not in self.keys:

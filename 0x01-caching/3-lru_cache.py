@@ -36,7 +36,7 @@ class LRUCache(BaseCaching):
         if key not in self.usage_history:
             self.usage_history.append(key)
 
-        last_item = list(self.cache_data)[-1]
+        last_item = list(self.cache_data)[0]
 
         if len(self.cache_data) > BaseCaching.MAX_ITEMS:
             self.cache_data.pop(last_item)
@@ -49,5 +49,5 @@ class LRUCache(BaseCaching):
         """
         if key is None or key not in self.cache_data:
             return None
-            
+
         self.cache_data.get(key)

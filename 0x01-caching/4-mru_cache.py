@@ -37,6 +37,16 @@ class MRUCache(BaseCaching):
 
         self.cache_data[key] = item
 
+        last_item = list(self.cache_data)[-2]
+
         if len(self.cache_data) > BaseCaching.MAX_ITEMS:
+            self.cache_data.pop(last_item)
+            print("DISCARD: ", last_item)
+
+    def get(self, key):
+        if key is None or key not in self.cache_data:
+            return None
+        
+        self.cache_data.get(key)
 
 
