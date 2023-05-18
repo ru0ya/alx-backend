@@ -44,6 +44,11 @@ class MRUCache(BaseCaching):
             print("DISCARD: ", last_item)
 
     def get(self, key):
+        """
+        Returns value in self.cache_data linked to key
+        if key is None or doesnt exist in self.cache_data
+        Returns None
+        """
         if key is None or key not in self.cache_data:
             return None
         
