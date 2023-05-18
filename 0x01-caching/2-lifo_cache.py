@@ -8,6 +8,10 @@ BaseCaching = __import__('base_caching').BaseCaching
 
 
 class LIFOCache(BaseCaching):
+    """
+    A caching system
+    A class constructor that inherits from BaseCaching
+    """
     def __init__(self):
         """
         child constructor
