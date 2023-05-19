@@ -17,6 +17,7 @@ class LIFOCache(BaseCaching):
         child constructor
         """
         super().__init__()
+        self.last = []
 
     def put(self, key, item):
         """
@@ -27,12 +28,15 @@ class LIFOCache(BaseCaching):
         if key is None or item is None:
             return
 
-        if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-            last_item = list(self.cache_data.keys())[- 1]
-            self.cache_data.pop(last_item)
-            print("DISCARD: ", key)
-
         self.cache_data[key] = item
+
+        if key not in self.cache_data:
+            self.last.append(key)
+
+        if len(self.last) > BaseCaching.MAX_ITEMS:
+            first_out = self.last.pop(-1)
+            del self.cache_data[first_out]
+            print("DISCARD: {:s}".format(first_out))
 
     def get(self, key):
         """

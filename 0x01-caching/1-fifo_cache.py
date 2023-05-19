@@ -30,10 +30,8 @@ class FIFOCache(BaseCaching):
         if key not in self.keys:
             self.keys.append(key)
 
-        last_key = list(self.cache_data)[0]
-
         if len(self.keys) > BaseCaching.MAX_ITEMS:
-            discard = self.keys.pop(last_key)
+            discard = self.keys.pop(0)
             del self.cache_data[discard]
             print("DISCARD: {:s} ".format(discard))
 
