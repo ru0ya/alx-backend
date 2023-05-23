@@ -22,11 +22,3 @@ class Config(object):
 
 app.config["DEFAULT_LOCALE"] = "en"
 app.config["DEFAULT_TIMEZONE"] = "UTC"
-
-
-@app.route
-def hello():
-    return render_template('1-index')
-
-if __name__ == "__main__":
-    app.run()
