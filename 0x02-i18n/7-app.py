@@ -6,6 +6,7 @@ with our supported languages
 from flask import Flask, render_template, request, g
 from flask_babel import Babel
 import locale
+import pytz
 
 
 users = {
@@ -25,8 +26,8 @@ class Config(object):
     Configures available languages in the app
     """
     LANGUAGES = ["en", "fr"]
-    DEFAULT_LOCALE = "en"
-    DEFAULT_TIMEZONE = "UTC"
+    BABEL_DEFAULT_LOCALE = "en"
+    BABEL_DEFAULT_TIMEZONE = "UTC"
 
 
 app.config.from_object(Config)
@@ -84,7 +85,21 @@ def before_request():
 
 @babel.timezoneselector
 def get_timezone():
-    timezone = request.args.get('timezone')
+    user_timezone = request.args.get('timezone')
+
+    if user_timezone in pytz.all_timezones:
+        return user_timezone
+    else:
+        raise pytz.exception.UnknownTimeZoneError
+
+    userId = request.args.get('login_as')
+    user_timezone = users[int(userId)]['timezone']
+
+    if user_timezone in pytz.all_timezones:
+        return user_timezone
+    else:
+        raise pytz.exception.UnknownTimeZoneError
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5000")

@@ -16,8 +16,8 @@ class Config(object):
     Configures available languages in the app
     """
     LANGUAGES = ["en", "fr"]
-    DEFAULT_LOCALE = "en"
-    DEFAULT_TIMEZONE = "UTC"
+    BABEL_DEFAULT_LOCALE = "en"
+    BABEL_DEFAULT_TIMEZONE = "UTC"
 
 
 @app.route('/')

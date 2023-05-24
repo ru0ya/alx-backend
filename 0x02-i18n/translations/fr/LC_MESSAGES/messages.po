@@ -1,1 +1,2 @@
 home_title "Bienvenue chez Holberton"
+current_time_is "Nous sommes le %(current_time)s."
