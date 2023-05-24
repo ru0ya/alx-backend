@@ -25,7 +25,7 @@ app.config.from_object(Config)
 
 
 @app.route('/')
-def hello():
+def root():
     """
     Returns: Html template
     """
