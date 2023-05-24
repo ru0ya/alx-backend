@@ -46,14 +46,17 @@ def get_locale():
     Determines best match with our supported
     languages: en, fr
     """
-    locale.setlocale(locale.LC_ALL, 'fr')
+    locale = request.args.get('locale', None)
 
-    locale = request.args.get('locale')
-
-    if locale and locale in LANGUAGES:
+    if locale and locale in app.config['LANGUAGES']:
         return f"{locale}"
-    else:
-        return request.accept_language.best_match(app.config["LANGUAGES"])
+
+    locale = request.headers.get('locale', None)
+
+    if locale and locale in app.config['LANGUAGES']:
+        return f"{locale}"
+
+    return request.accept_language.best_match(app.config["LANGUAGES"])
 
 
 def get_user():

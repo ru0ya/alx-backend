@@ -46,14 +46,17 @@ def get_locale():
     Determines best match with our supported
     languages: en, fr
     """
-    locale.setlocale(locale.LC_ALL, 'fr')
+    locale = request.args.get('locale', None)
 
-    locale = request.args.get('locale')
-
-    if locale and locale in LANGUAGES:
+    if locale and locale in app.config['LANGUAGES']:
         return f"{locale}"
-    else:
-        return request.accept_language.best_match(app.config["LANGUAGES"])
+
+    locale = request.headers.get('locale', None)
+
+    if locale and locale in app.config['LANGUAGES']:
+        return f"{locale}"
+
+    return request.accept_language.best_match(app.config["LANGUAGES"])
 
 
 def get_user():
@@ -78,6 +81,10 @@ def before_request():
     current_user = get_user()
     g.user = current_user
 
+
+@babel.timezoneselector
+def get_timezone():
+    timezone = request.args.get('timezone')
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5000")
