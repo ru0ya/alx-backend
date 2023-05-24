@@ -3,6 +3,42 @@
 Function that determines best match
 with our supported languages
 """
+from flask import Flask, render_template, request, flash
+from flask_babel import Babel
+import locale
+
+
+app = Flask(__name__)
+babel = Babel(app)
+
+
+class Config(object):
+    """
+    Configures available languages in the app
+    """
+    LANGUAGES = ["en", "fr"]
+    DEFAULT_LOCALE = "en"
+    DEFAULT_TIMEZONE = "UTC"
+
+
+app.config.from_object(Config)
+
+
+@app.route('/')
+def hello():
+    """
+    Returns: Html template
+    """
+    return render_template('4-index.html')
+
+
+def parameterize_templates(home_title, home_header):
+    """
+    Uses gettext to parameterize templates using the message
+    IDs 'home_title' and 'home_header'
+    """
+    flash(gettext('%(title)s', title=home_title))
+    flash(gettext('%(h1)s', h1=home_header))
 
 
 @babel.localeselector
@@ -19,3 +55,7 @@ def get_locale():
         return f"{locale}"
     else:
         return request.accept_language.best_match(app.config["LANGUAGES"])
+
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port="5000")
