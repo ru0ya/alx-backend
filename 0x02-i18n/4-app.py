@@ -32,15 +32,6 @@ def hello():
     return render_template('4-index.html')
 
 
-def parameterize_templates(home_title, home_header):
-    """
-    Uses gettext to parameterize templates using the message
-    IDs 'home_title' and 'home_header'
-    """
-    flash(gettext('%(title)s', title=home_title))
-    flash(gettext('%(h1)s', h1=home_header))
-
-
 @babel.localeselector
 def get_locale():
     """

@@ -42,14 +42,5 @@ def get_locale():
     return request.accept_language.best_match(app.config["LANGUAGES"])
 
 
-def parameterize_templates(home_title, home_header):
-    """
-    Uses gettext to parameterize templates using the message
-    IDs 'home_title' and 'home_header'
-    """
-    flash(gettext('%(title)s', title=home_title))
-    flash(gettext('%(h1)s', h1=home_header))
-
-
 if __name__ == "__main__":
     app.run()
