@@ -37,4 +37,4 @@ def get_locale():
     Determines best match with our supported
     languages: en, fr
     """
-    return request.accept_language.best_match(app.config["LANGUAGES"])
+    return request.accept_languages.best_match(app.config["LANGUAGES"])
