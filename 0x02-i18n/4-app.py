@@ -24,14 +24,6 @@ class Config(object):
 app.config.from_object(Config)
 
 
-@app.route('/')
-def root():
-    """
-    Returns: Html template
-    """
-    return render_template('4-index.html')
-
-
 @babel.localeselector
 def get_locale():
     """
@@ -46,6 +38,14 @@ def get_locale():
         return locale
     else:
         return request.accept_languages.best_match(app.config["LANGUAGES"])
+
+
+@app.route('/')
+def root():
+    """
+    Returns: Html template
+    """
+    return render_template('4-index.html')
 
 
 if __name__ == "__main__":
