@@ -26,7 +26,7 @@ app.config.from_object(Config)
 
 
 @app.route('/')
-def root():
+def root() -> str:
     """
     Returns: Html template
     """
@@ -34,7 +34,7 @@ def root():
 
 
 @babel.localeselector
-def get_locale():
+def get_locale() -> str:
     """
     Determines best match with our supported
     languages: en, fr
